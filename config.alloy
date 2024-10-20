@@ -1,0 +1,22 @@
+prometheus.scrape "default" {
+        targets    = [
+                {"__address__" = "localhost:9090"},
+        ]
+        forward_to = [prometheus.remote_write.default.receiver]
+        scrape_interval = "3s"
+        scrape_timeout = "1s"
+}
+
+prometheus.remote_write "default" {
+        endpoint {
+                url = "http://localhost:3000/api/prom/push"
+		basic_auth {
+			username = "admin"
+			password = "admin"
+		}
+        }
+}
+
+livedebugging {
+        enabled = true
+}
