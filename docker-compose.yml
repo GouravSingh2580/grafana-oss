@@ -21,6 +21,7 @@ services:
 
   tempo:
     image: grafana/tempo:latest
+    command: "-config.file=/etc/tempo/tempo.yml"
     container_name: tempo
     ports:
       - "14268:14268"
